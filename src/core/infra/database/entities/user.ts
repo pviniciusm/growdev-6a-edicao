@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { IUser } from "../../../../features/user/domain/contracts/user";
 
 @Entity()
-export class User {
+export class User implements IUser {
     @PrimaryColumn({
         length: 50,
     })
@@ -21,7 +22,7 @@ export class User {
         length: 50,
         nullable: true,
     })
-    city: string;
+    city?: string;
 
     @UpdateDateColumn()
     updatedAt: Date;
