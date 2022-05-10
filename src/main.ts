@@ -1,10 +1,10 @@
 import { Server } from "./core/presentation/server/index";
 import { DatabaseConnection } from "./core/infra/database/connections/database-connection";
-import express from "express";
-import cors from "cors";
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+import "dotenv/config";
+import { RedisConnection } from "./core/infra/database/connections/redis-connection";
 
-DatabaseConnection.initialize().then(Server.initialize);
+DatabaseConnection.initialize().then(() => {
+    RedisConnection.initialize();
+    Server.initialize();
+});
