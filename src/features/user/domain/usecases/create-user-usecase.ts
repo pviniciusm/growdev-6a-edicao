@@ -15,6 +15,7 @@ export class CreateUserUseCase {
 
         const user = await repository.create(params);
 
+        await cacheRepository.set(`users:${user.username}`, user);
         await cacheRepository.delete("users");
 
         return user;
