@@ -24,4 +24,15 @@ export class UserRepository {
     async list(): Promise<User[]> {
         return await this._repository.find();
     }
+
+    async delete(username: string) {
+        await this._repository.delete(username);
+    }
+
+    async update(user: User, params: Partial<IUser>) {
+        user.city = params.city ?? user.city;
+        user.name = params.name ?? user.name;
+
+        await this._repository.save(user);
+    }
 }

@@ -1,3 +1,5 @@
+import { UpdateUserController } from "./../controllers/update-user-controller";
+import { DeleteUserController } from "./../controllers/delete-user-controller";
 import { CreateUserController } from "./../controllers/create-user-controller";
 import { Request, response, Response, Router } from "express";
 import { GetUserController } from "../controllers/get-user-controller";
@@ -17,6 +19,14 @@ export class UserRoutes {
 
         router.get("/", (req: Request, res: Response) => {
             return new ListUserController().handle(req, res);
+        });
+
+        router.delete("/:username", (req: Request, res: Response) => {
+            return new DeleteUserController().handle(req, res);
+        });
+
+        router.put("/:username", (req: Request, res: Response) => {
+            return new UpdateUserController().handle(req, res);
         });
 
         return router;
