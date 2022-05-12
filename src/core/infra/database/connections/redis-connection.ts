@@ -13,8 +13,12 @@ export class RedisConnection {
             //     username: ""
             // });
 
-            const redisUrl = process.env.REDIS_URL;
-            this.connection = new ioredis(redisUrl);
+            const redisUrl = process.env.REDIS_URL_HEROKU;
+            this.connection = new ioredis(redisUrl, {
+                tls: {
+                    rejectUnauthorized: false,
+                },
+            });
         }
 
         console.log("Redis is connected.");
